@@ -3,11 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile Picture</title>
+  <title>Matrimonial Profile - Manu S</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #9a3412;
+      --primary-dark: #7c2d12;
+      --accent: #d97706;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -15,157 +26,362 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at top, #1e293b, #0f172a);
-      color: #f8fafc;
-      padding: 24px;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #fffbeb, #f8fafc 40%);
+      color: var(--text-main);
+      padding: 32px 16px;
+      line-height: 1.6;
     }
 
     .container {
-      background: rgba(30, 41, 59, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--card-bg);
       border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(217, 119, 6, 0.2);
+      overflow: hidden;
+    }
+
+    .header-banner {
+      background: linear-gradient(135deg, #7c2d12, #9a3412, #b45309);
+      color: #fff;
       padding: 40px 32px;
-      max-width: 420px;
-      width: 100%;
       text-align: center;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
 
-    .image-wrapper {
+    .header-badge {
+      display: inline-block;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 6px 18px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .header-banner h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.3rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .header-banner p {
+      color: #fef3c7;
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      padding: 36px;
+    }
+
+    @media (max-width: 860px) {
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .section-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #fed7aa;
+    }
+
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .details-table tr {
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .details-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .details-table td {
+      padding: 10px 4px;
+      font-size: 0.95rem;
+      vertical-align: top;
+    }
+
+    .details-table .label {
+      color: var(--text-muted);
+      font-weight: 500;
+      width: 42%;
+    }
+
+    .details-table .val {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .photo-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .main-photo-wrapper {
       position: relative;
-      width: 180px;
-      height: 180px;
-      margin: 0 auto 24px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 4px solid #fff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      aspect-ratio: 4 / 5;
+      background: #e2e8f0;
     }
 
-    .profile-img {
+    .main-photo-wrapper img, .thumbnail-wrapper img {
       width: 100%;
       height: 100%;
-      border-radius: 50%;
       object-fit: cover;
-      border: 4px solid rgba(56, 189, 248, 0.5);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      display: block;
+      transition: transform 0.4s ease;
     }
 
-    .profile-img:hover {
+    .main-photo-wrapper:hover img, .thumbnail-wrapper:hover img {
       transform: scale(1.03);
-      border-color: #38bdf8;
     }
 
-    h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: -0.02em;
+    .thumbnail-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
 
-    p {
-      color: #94a3b8;
-      font-size: 0.95rem;
-      margin-bottom: 28px;
+    .thumbnail-wrapper {
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      border: 3px solid #fff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      background: #e2e8f0;
     }
 
     .actions {
       display: flex;
-      flex-direction: column;
       gap: 12px;
+      justify-content: center;
+      padding: 24px 36px 36px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
-      width: 100%;
-      padding: 14px 20px;
+      padding: 12px 24px;
       border-radius: 12px;
       font-size: 0.95rem;
       font-weight: 600;
       text-decoration: none;
       cursor: pointer;
-      transition: all 0.2s ease;
       border: none;
+      transition: all 0.2s ease;
     }
 
-    .btn-download {
-      background: #0284c7;
-      color: #ffffff;
-      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
     }
 
-    .btn-download:hover {
-      background: #0369a1;
+    .btn-primary:hover {
+      background: var(--primary-dark);
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
     }
 
-    .btn-view {
-      background: rgba(255, 255, 255, 0.06);
-      color: #e2e8f0;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+    .btn-outline {
+      background: #f1f5f9;
+      color: var(--text-main);
     }
 
-    .btn-view:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.25);
+    .btn-outline:hover {
+      background: #e2e8f0;
     }
 
-    .btn svg {
-      width: 18px;
-      height: 18px;
-      stroke-width: 2.2;
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .container {
+        box-shadow: none;
+        border: none;
+      }
+      .actions {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
 
-  <main class="container">
-    <div class="image-wrapper">
-      <img 
-        id="profilePic"
-        src="IMG_1440.jpg" 
-        alt="Profile Picture" 
-        class="profile-img"
-        onerror="handleImageError(this)"
-      />
-    </div>
+  <div class="container">
+    <header class="header-banner">
+      <div class="header-badge">Matrimonial Profile</div>
+      <h1>Manu S</h1>
+      <p>Birth Name: Darani &bull; Software Professional, Bangalore</p>
+    </header>
 
-    <h1>My Profile Picture</h1>
-    <p>View or download the full resolution photo below.</p>
+    <main class="profile-grid">
+      <div class="details-column">
 
-    <div class="actions">
-      <a href="IMG_1440.jpg" download="IMG_1440.jpg" class="btn btn-download">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-        </svg>
-        Download Photo
+        <section class="section-card">
+          <h2 class="section-title">Personal & Birth Details</h2>
+          <table class="details-table">
+            <tr>
+              <td class="label">Official Name</td>
+              <td class="val">Manu S</td>
+            </tr>
+            <tr>
+              <td class="label">Birth Name</td>
+              <td class="val">Darani</td>
+            </tr>
+            <tr>
+              <td class="label">Date of Birth</td>
+              <td class="val">04 February 1996 (Sunday)</td>
+            </tr>
+            <tr>
+              <td class="label">Time of Birth</td>
+              <td class="val">10:30 AM</td>
+            </tr>
+            <tr>
+              <td class="label">Height</td>
+              <td class="val">5'7"</td>
+            </tr>
+            <tr>
+              <td class="label">Birth Location</td>
+              <td class="val">Chikkamagalur</td>
+            </tr>
+          </table>
+        </section>
+
+        <section class="section-card">
+          <h2 class="section-title">Horoscope Details</h2>
+          <table class="details-table">
+            <tr>
+              <td class="label">Zodiac Sign (Rashi)</td>
+              <td class="val">Cancer (♋)</td>
+            </tr>
+            <tr>
+              <td class="label">Nakshatra (Star)</td>
+              <td class="val">Pushya Nakshatra</td>
+            </tr>
+            <tr>
+              <td class="label">Caste</td>
+              <td class="val">Kuruhina Shetty</td>
+            </tr>
+            <tr>
+              <td class="label">Gothra</td>
+              <td class="val">Parama Gothra</td>
+            </tr>
+          </table>
+        </section>
+
+        <section class="section-card">
+          <h2 class="section-title">Education & Career</h2>
+          <table class="details-table">
+            <tr>
+              <td class="label">Education</td>
+              <td class="val">Bachelor's of Engineering (B.E.)</td>
+            </tr>
+            <tr>
+              <td class="label">Occupation</td>
+              <td class="val">Software Professional</td>
+            </tr>
+            <tr>
+              <td class="label">Work Location</td>
+              <td class="val">Bangalore</td>
+            </tr>
+          </table>
+        </section>
+
+        <section class="section-card">
+          <h2 class="section-title">Family & Address</h2>
+          <table class="details-table">
+            <tr>
+              <td class="label">Father</td>
+              <td class="val">Suresh A S</td>
+            </tr>
+            <tr>
+              <td class="label">Mother</td>
+              <td class="val">Janaki</td>
+            </tr>
+            <tr>
+              <td class="label">Elder Brother</td>
+              <td class="val">Engineer (Married)</td>
+            </tr>
+            <tr>
+              <td class="label">Address</td>
+              <td class="val">Vijayapura, Chikkamagaluru - 577101</td>
+            </tr>
+          </table>
+        </section>
+
+      </div>
+
+      <div class="photo-column">
+        <div class="photo-gallery">
+          <div class="main-photo-wrapper">
+            <img 
+              src="IMG_1440.jpg" 
+              alt="Manu S - Profile Photo"
+              onerror="this.onerror=null; this.src='photo1.jpg';" 
+            />
+          </div>
+
+          <div class="thumbnail-row">
+            <div class="thumbnail-wrapper">
+              <img 
+                src="photo2.jpg" 
+                alt="Manu S - Photo 2"
+                onerror="this.onerror=null; this.src='IMG_1440.jpg';" 
+              />
+            </div>
+            <div class="thumbnail-wrapper">
+              <img 
+                src="photo3.jpg" 
+                alt="Manu S - Photo 3"
+                onerror="this.onerror=null; this.src='IMG_1440.jpg';" 
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="actions">
+      <button class="btn btn-primary" onclick="window.print()">
+        Print / Save as PDF
+      </button>
+      <a href="IMG_1440.jpg" download class="btn btn-outline">
+        Download Main Photo
       </a>
-
-      <a href="IMG_1440.jpg" target="_blank" rel="noopener noreferrer" class="btn btn-view">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-        </svg>
-        View Full Size
-      </a>
-    </div>
-  </main>
-
-  <script>
-    function handleImageError(img) {
-      if (img.src.endsWith('IMG_1440.jpg')) {
-        img.src = 'IMG_1440.JPG';
-      }
-    }
-  </script>
+    </footer>
+  </div>
 
 </body>
 </html>
